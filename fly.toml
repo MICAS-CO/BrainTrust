@@ -1,6 +1,6 @@
 # Change ONLY this name to something globally unique (lowercase, hyphens ok).
 # e.g. "braintrust-mcp-hamza". If deploy fails saying the name is taken, change it.
-app = "BRAINTRUST"
+app = "braintrust"
 primary_region = "lhr"  # London — closest Fly region to Ireland
 
 [build]
