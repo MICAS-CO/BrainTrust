@@ -9,14 +9,11 @@ and add as a custom connector in Claude.
   pip install "fastmcp>=2" openai google-genai
   export OPENAI_API_KEY=sk-...
   export GEMINI_API_KEY=...
-  # optional, but recommended if the endpoint is reachable from the public internet:
-  export BRAINTRUST_TOKEN=some-long-random-string
+  export GPTZERO_API_KEY=...   # optional; enables the check_ai_detection tool
   python braintrust_mcp.py
 
-Then point your tunnel at http://localhost:8787/mcp and add that URL as a
-custom connector. If you set BRAINTRUST_TOKEN, Claude's connector config needs
-the same value as a Bearer token (or just gate the hostname behind Cloudflare
-Access, which is cleaner).
+Add the resulting URL (…/mcp) as a custom connector in Claude. The endpoint is
+unauthenticated, so keep the URL private and set spend caps on your API keys.
 """
 
 import asyncio
@@ -31,7 +28,6 @@ from google import genai
 OPENAI_MODEL = os.environ.get("BRAINTRUST_OPENAI_MODEL", "gpt-5.5")
 GEMINI_MODEL = os.environ.get("BRAINTRUST_GEMINI_MODEL", "gemini-3.1-pro-preview")
 PORT = int(os.environ.get("BRAINTRUST_PORT", "8787"))
-AUTH_TOKEN = os.environ.get("BRAINTRUST_TOKEN")  # if unset, no bearer check
 # Optional. If unset, the check_ai_detection tool reports "not configured" rather
 # than crashing the server — so you can deploy before subscribing to GPTZero.
 GPTZERO_API_KEY = os.environ.get("GPTZERO_API_KEY")
@@ -85,15 +81,12 @@ async def _ask_gemini(work: str, context: str) -> str:
     return resp.text or "(empty response)"
 
 
-# Optional bearer-token gate. If BRAINTRUST_TOKEN is set, the endpoint requires it.
-# In FastMCP 3.x the verifier goes on the constructor, not on run().
-_auth = None
-if AUTH_TOKEN:
-    from fastmcp.server.auth import StaticTokenVerifier
-
-    _auth = StaticTokenVerifier(tokens={AUTH_TOKEN: {"client_id": "braintrust"}})
-
-mcp = FastMCP("braintrust", auth=_auth)
+# No auth gate. Claude's custom-connector dialog authenticates via OAuth and has
+# no field for a static bearer token, so a StaticTokenVerifier here makes the
+# endpoint impossible to connect. For a personal endpoint, security rests on the
+# unguessable .fly.dev URL plus hard spend caps on your OpenAI/Gemini keys —
+# set those in each provider's dashboard; they're the real protection.
+mcp = FastMCP("braintrust")
 
 
 @mcp.tool
