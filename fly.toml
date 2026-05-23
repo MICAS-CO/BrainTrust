@@ -1,0 +1,17 @@
+# Change ONLY this name to something globally unique (lowercase, hyphens ok).
+# e.g. "braintrust-mcp-hamza". If deploy fails saying the name is taken, change it.
+app = "CHANGE-ME-TO-A-UNIQUE-NAME"
+primary_region = "lhr"  # London — closest Fly region to Ireland
+
+[build]
+
+[http_service]
+  internal_port = 8787          # must match the port the server listens on
+  force_https = true
+  auto_stop_machines = "stop"   # machine sleeps when idle (keeps cost ~nil)
+  auto_start_machines = true    # and wakes automatically when Claude calls it
+  min_machines_running = 0
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
