@@ -234,3 +234,53 @@ phased start. See workbook tab **14_East_permutations** and `MICAS_east_permutat
 **Caveats.** Illustrative *relative* model: absolute volumes carry ±30% demand uncertainty plus
 the burstiness caveat above. Tier decline/mobilisation propensities are assumptions anchored to
 the observed bimodal mobilisation. Excludes cost and crew-rest rules.
+
+---
+
+## Historical MICAS data (1996–2025) — supply saturation
+
+Four additional historical workbooks (2024 national activity; East/South/West 2025 logs) were
+analysed. They **strongly corroborate the supply-constrained thesis** and validate the model
+parameters. (These files also retain DOB/age/gender — kept aggregate; not committed.)
+
+**Long-run trend.** National MICAS activity grew from ~23 (1996) and 104 (2016) to a **COVID-19
+peak of 469 (2021)**, then **plateaued at ~346–360/yr for four straight years (2022–2025)**. A
+flat ceiling for four years — while **~23% of referrals are declined** and "no-service" days are
+logged — is the signature of a service capped by *supply*, not demand. See
+`MICAS_longrun_trend.png`.
+
+**2024 detail (national):**
+
+| Outcome 2024 | Count |
+|---|---:|
+| Transferred (delivered) | **360** |
+| **Declined** | **107 (~23% of referrals)** |
+| Deferred / Stood down / Not transferred | ~21 |
+
+| Team 2024 | Transfers | Share | YoY |
+|---|---:|---:|---:|
+| East (Dublin) | 214 | 59% | +8.6% |
+| West (Galway) | 83 | 23% | +10.7% |
+| South (Cork) | 63 | 18% | **−25%** |
+
+**Small-team fragility.** The Staff-restrictions log shows repeated **whole-day "no service"**
+events from single absences — South "no consultant" (≈8 days), West "nurse ill" / "no doctor" /
+"ambulance breakdown". This explains South's −25% (a *supply* contraction, not falling demand)
+and confirms that thin single-team regional cover is fragile — reinforcing **no South/West
+expansion** and favouring **resilience/redundancy in the East** (the second-team plan).
+
+**Parameter validation (2025 team logs).** Confirms the modelling assumptions:
+
+- **100% of retrievals ventilated** — MICAS is unambiguously top-of-pyramid critical care.
+- **Job commitment** medians: East 3.3 h, South 4.4 h, **West 5.6 h** (rural/long-distance) —
+  brackets the ~4.3 h used in the recovery models.
+- **Mobilisation** confirms the two-tier East structure: East **bimodal** (median 30 min, long
+  tail), South fast (15 min, co-located), West slow (38 min). South/West are single-tier.
+
+**Reconciliation.** The canonical *delivered* figure is **~356–360/yr (calendar)**; the earlier
+~405 (from the rolling 12-month anonymised export) was a window/counting artefact. The headline
+unmet-need picture is unchanged — if anything strengthened: with **107 declines/yr measured in
+2024 alone** (mostly capacity/overrun, same pattern as the 2026 log) *before* counting the
+invisible out-of-hours demand, the recovery estimates (e.g. ~+130/yr from a second East team)
+are well within the demonstrated gap. Workbook tabs **15_Historical_trend**,
+**16_Team_split_decline**; charts `MICAS_longrun_trend.png`, `MICAS_team_split.png`.
