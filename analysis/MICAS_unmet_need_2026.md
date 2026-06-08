@@ -79,3 +79,59 @@ Defensible unmet-need range: **~3,200–5,800 transfers/year**.
 Cohort and "critical-care" are proxies (age anonymised; complexity inferred from dispatch
 code). The simulation ignores return-to-base travel, so it is mildly optimistic on capacity.
 Annualisation is a flat ×3.06 (no seasonality adjustment).
+
+---
+
+## Reassessment with actual MICAS activity data
+
+A second anonymised dataset — the **actual MICAS retrieval log** (Jan 2025–Jun 2026) — was
+supplied and reconciled against the P37 demand. It materially refines the picture. (Note: the
+raw MICAS file still contains referring-consultant names and patient DOB/age/gender — it is
+**not** committed here; only aggregate figures are.)
+
+**What MICAS actually does (12 months, Jun 2025–May 2026):**
+
+- **~405 retrievals delivered/yr** from 459 referrals; **11.6% declined**.
+- By team: **East ~67%** (270), West 78, South 57 — confirms East is the busiest.
+- Genuine ICU-level work: **86% referred from ICU**, 84% arterial line, 70% CVC,
+  **51% on vasopressors, 47% sedated/ventilated**; occasional ECMO/IABP; SOFA-scored.
+- **Each retrieval commits a team ~4.3 h** (median 4.0; 90th pct 7 h; some 9–15 h) — roughly
+  2× a NAS P37 job, due to ~1 h hands-on stabilisation + long distance + ICU handover.
+- **99% of referrals arrive in-hours** (08:00–20:00); weekend delivery ~0.45/day vs
+  1.4/weekday. The service is structurally invisible at night.
+
+**Implication for the first-pass model:** the broad "additional personnel / special
+equipment" P37 proxy (~5,500/yr) was **too wide**. Real MICAS work sits at the very top of
+the acuity pyramid, so the demand denominator must be re-anchored.
+
+**Unmet need — now evidenced, not just modelled.** Three supply constraints:
+
+1. **No out-of-hours service (largest gap).** 99% of referrals are in-hours because referrers
+   know there is no night team; every night-time critical-care transfer therefore goes to a
+   frontline NAS crew and never appears as a MICAS referral. P37 data shows ~half of
+   high-acuity transfer demand is 20:00–08:00.
+2. **Peak capacity saturation.** Of declines, **~54%+ are supply-side** ("no team available",
+   "both teams out", "superseded by a more acute call") — only ~11% are correct clinical
+   gatekeeping; 8 explicitly note fallback to "P37 / local / private ambulance". Matches the
+   P37 concurrency peak of 9 simultaneous high-acuity jobs vs 3 teams.
+3. **Thin weekend cover.** One team (East) nationally at weekends.
+
+**Re-sized reconciliation (annualised):**
+
+| Cohort | Volume |
+|---|---|
+| MICAS delivered (actual) | ~410–470 |
+| MICAS declined for capacity/hours (measured floor) | ~30–55 |
+| P37 `37D03` "inappropriate for NAS" (narrowest high-acuity) | ~800 |
+| P37 Delta + special equipment (broad ICU proxy) | ~3,700 |
+| First-pass "enhanced need" (now considered too wide) | ~5,500 |
+
+MICAS delivers ~**51% of the narrowest** high-acuity band, ~11% of the Delta+equipment proxy,
+and ~7% of the broad proxy. **Defensible unmet-need range ≈ 400–1,100 critical-care
+transfers/yr** — i.e. MICAS currently meets roughly **one-third to one-half** of genuine
+high-acuity demand, constrained by hours (no nights), weekend cover (1 team) and peak capacity
+(long jobs + simultaneous referrals). A precise figure needs a clinical inclusion rule applied
+to the P37 cohort; the range reflects that the anonymised P37 data cannot see
+ventilation/vasopressor status directly.
+
+See workbook tabs **10_MICAS_actual**, **11_Declines_categorised**, **12_Reconciliation**.
