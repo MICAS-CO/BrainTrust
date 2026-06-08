@@ -284,3 +284,41 @@ unmet-need picture is unchanged — if anything strengthened: with **107 decline
 invisible out-of-hours demand, the recovery estimates (e.g. ~+130/yr from a second East team)
 are well within the demonstrated gap. Workbook tabs **15_Historical_trend**,
 **16_Team_split_decline**; charts `MICAS_longrun_trend.png`, `MICAS_team_split.png`.
+
+---
+
+## Hospital crosswalk — corridors & distance (the overrun mechanism)
+
+A hospital reference (code → name + Eircode + lat/long) decoded 39/42 MICAS hospital codes
+(remainder: "Other" and **2 UK/out-of-state transfers** — Altnagelvin and a UK specialist
+centre). The geocodes let us compute transfer distance, which **quantifies the overrun
+mechanism** behind the long-distance declines.
+
+**Top corridors (decoded):** Mayo→Galway (20×, 66 km), Beaumont→Mater (15×, 5 km),
+Naas→Tallaght (11×, 21 km), Beaumont→St James (10×, 8 km), Bandon→CUH (9×), Portlaoise→St James
+(9×, 73 km), **Galway↔Beaumont (16× combined, 189 km)**, Kerry→CUH (91 km). Dublin is the
+dominant receiving hub (see `MICAS_corridor_map.png`).
+
+**Distance by team (one-way):** East median **41 km** (mean 60), South **84 km**, West **118 km**
+(mean 125, 90th pct 190). Overall 31% of transfers exceed 100 km, 18% exceed 150 km.
+
+**Distance drives job length (r = 0.61):**
+
+| One-way distance | Mean job commitment |
+|---|---:|
+| 0–50 km | 3.3 h |
+| 50–100 km | 4.6 h |
+| 100–150 km | 5.1 h |
+| 150 km+ | 6.4 h |
+
+**Why this matters:**
+
+- It is the hard evidence for **Cork/Galway declining long-distance calls**: a 150 km+ retrieval
+  is a 6–8 h round trip — a guaranteed shift overrun — so those calls are refused and fall to
+  NAS (mirroring "Distance Involved" being the #1 out-of-performance reason in the P37 data).
+- It explains **West's lower throughput** (median 118 km ⇒ ~5.6 h jobs ⇒ ~1 retrieval/shift).
+- It is a quantified argument for the **second *East* team**: East corridors are short
+  (median 41 km ⇒ ~3.3 h), so an East crew completes **more retrievals per shift** than any
+  regional crew — the most throughput per pound, reinforcing East-first expansion over S/W.
+
+Workbook tab **17_Corridors_decoded**; map `MICAS_corridor_map.png`.
