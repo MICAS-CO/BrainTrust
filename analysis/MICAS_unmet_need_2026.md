@@ -135,3 +135,46 @@ to the P37 cohort; the range reflects that the anonymised P37 data cannot see
 ventilation/vasopressor status directly.
 
 See workbook tabs **10_MICAS_actual**, **11_Declines_categorised**, **12_Reconciliation**.
+
+---
+
+## Out-of-hours / extra-team recovery model
+
+**Question:** how many additional retrievals would each rota change recover?
+
+**Method.** A discrete-event simulation drives MICAS-appropriate demand (the adult high-acuity
+P37 cohort, whose **temporal shape is stable across proxy definitions** — ~47% weekday-day,
+~12% weekday-evening, ~14% weekday-night, ~16% weekend-day, ~11% weekend evening/night) through
+each rota. Job durations are **resampled from the actual MICAS log (~4.3 h mean)**, teams are
+modelled as shift-lines that can overrun, and the result is **calibrated so the current rota
+reproduces the actual ~405 retrievals/yr**. Total MICAS-appropriate demand is taken as
+~900/yr central, with sensitivity 700–1,100; conclusions are robust across that range.
+
+| Rota option | Served/yr | **Recovered vs now** |
+|---|---:|---:|
+| **C0 Current** — 3 wkdy / 1 wkend team, 08:00–20:00 | ~405 | — |
+| **C1 +Weekend teams** — 3 teams 7 days, 08:00–20:00 | ~440 | **+35** |
+| **C2 +Evenings** — 3 teams 7 days, 08:00–24:00 | ~565 | **+161** |
+| **C3 24/7** — 3 teams round-the-clock | ~695 | **+291** |
+| **C4 24/7 + 4th team** | ~710 | **+303** |
+
+**Findings:**
+
+- **Evenings (C2) are the best value lever: ~+160 retrievals/yr (~40% uplift)** from extending
+  the existing three crews' finish to ~midnight — covering the 20:00–24:00 evening peak with
+  no new daytime teams.
+- **Full 24/7 (C3) ~doubles delivered activity to ~695/yr (+291)**, closing most of the gap;
+  the incremental deep-night (00:00–08:00) volume is lower but needs a full night roster.
+- **A 4th team adds little volume at current demand (~+12 over C3)** — three round-the-clock
+  teams already absorb most concurrent demand. Justify a 4th team on **peak resilience /
+  guaranteeing the sickest time-critical cases**, evidenced by the "both teams out" declines —
+  and revisit if true demand exceeds ~1,100/yr.
+- **Weekend-only uplift (C1) is modest (+35)** because East already covers weekend days; the
+  weekend prize is captured within the 24/7 option.
+
+**Priority ladder for a business case:** evenings → full 24/7 → 4th team for resilience.
+
+**Caveats.** Demand denominator is calibrated/estimated (sensitivity shown). Assumes referrers
+would refer out-of-hours if a service existed (supported: those transfers currently happen via
+NAS at night). Excludes cost, crew fatigue/rest rules, and repatriation logistics. See workbook
+tab **13_Recovery_scenarios** and `MICAS_recovery_scenarios.png`.
