@@ -178,3 +178,59 @@ reproduces the actual ~405 retrievals/yr**. Total MICAS-appropriate demand is ta
 would refer out-of-hours if a service existed (supported: those transfers currently happen via
 NAS at night). Excludes cost, crew fatigue/rest rules, and repatriation logistics. See workbook
 tab **13_Recovery_scenarios** and `MICAS_recovery_scenarios.png`.
+
+---
+
+## East expansion — two-tier permutations
+
+The national-pool assumption was refined: **Cork and Galway are effectively regional** (they
+decline long-distance calls to avoid shift overruns) and **will not expand** (uneconomic at
+their volumes). The realistic expansion is in the **East**, which runs a **two-tier** model:
+
+- **MICAS Acute** (whole team co-located at the NASCCRS base) — runs 2–3 days/week; **fast
+  mobilisation and few declines**.
+- **Hospital-composite** (EMT ± nurse at base + a doctor ± nurse pulled from a hospital ICU —
+  SVUH/BH/MMUH) on the other days — **slower to activate and more likely to decline**.
+
+This two-tier structure is **confirmed in the data**: East mobilisation is bimodal — **52%
+≤25 min (Acute) vs 32% ≥45 min (composite; 90th pct 90 min)**, and the "Team Ready <30 min"
+KPI is FALSE on ~42% of East jobs. South is uniformly fast (median 20 min), West slower —
+consistent with no expansion there.
+
+**Model.** East-only discrete-event simulation; demand = North Leinster adult high-acuity P37;
+job durations from the actual MICAS log; two tiers parameterised with different mobilisation,
+overrun tolerance and decline propensity. **The absolute baseline is model-sensitive** (the
+broad P37 stream is burstier than true ICU-retrieval demand, so a lone team under-serves vs the
+real ~270), therefore the **recovery deltas** are reported (robust across parameterisations),
+with a ±30% demand range. Cork & Galway are held constant.
+
+| Permutation (on top of current ~270/yr) | **Recovered/yr** | of which evening 20–24 |
+|---|---:|---:|
+| **P1** Acute every weekday (1 team, 08–20) | **+~24** (19–28) | 0 |
+| **P2** P1 + 2nd team **08–20** | +~79 | 0 |
+| **P3** P1 + 2nd team **10–22** | +~110 (76–141) | ~9 |
+| **P4** P1 + 2nd team **12–00** | **+~130 (92–166)** | ~24 |
+| **P5** P1 + 2nd team **12–00, Acute all 5 days** | +~155 (120–180) | ~37 |
+
+**Findings:**
+
+- **Upgrading the first team to Acute every weekday (P1) is a small volume gain (~+24/yr)** but
+  its real value is *quality*: faster activation for time-critical cases and fewer declines. It
+  is also the foundation for the two-team base model.
+- **The second weekday East team is the major lever (~+80–160/yr).**
+- **Shift timing is the key decision, and a later shift wins.** An 08–20 second team only adds
+  daytime concurrency (no new hours); **10–22 covers the front of the evening (20–22); 12:00–00:00
+  covers the whole evening peak (20:00–24:00)** — which is **entirely uncovered today**. Evening
+  20:00–24:00 is one of the busiest demand bands (see `MICAS_east_shift_choice.png`), so
+  **12:00–00:00 recovers the most and is recommended**; 10–22 is the fallback if a midnight
+  finish is impractical, at the cost of the 22:00–24:00 tail. Starting at 12:00 sacrifices little,
+  because the first team already covers the 08:00–12:00 morning.
+
+**Recommendation:** (1) make the first East team Acute every weekday; (2) add a second weekday
+East team on a **12:00–00:00** shift; (3) staff it as Acute on as many weekdays as feasible —
+the "2× Acute base 2–3 days + Acute-plus-hospital-secondary on other days" plan is a sound
+phased start. See workbook tab **14_East_permutations** and `MICAS_east_permutations.png`.
+
+**Caveats.** Illustrative *relative* model: absolute volumes carry ±30% demand uncertainty plus
+the burstiness caveat above. Tier decline/mobilisation propensities are assumptions anchored to
+the observed bimodal mobilisation. Excludes cost and crew-rest rules.
